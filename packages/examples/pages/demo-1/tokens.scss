@@ -1,0 +1,34 @@
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
+  Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+
+$primary: #00f;
+$black: #000;
+$white: #000;
+
+$modes: (
+  light: (
+    text: #000,
+    background: #fff,
+    primary: hotpink,
+    what: #ffffff
+  ),
+  dark: (
+    primary: aqua,
+    background: #111,
+    what: #424242,
+    text: #eee
+  ),
+  bright: (
+    primary: blue,
+    background: yellow,
+    what: #424242,
+    text: #000
+  ),
+  dracula: (
+    primary: #44fb75,
+    background: #282a36,
+    title: #fff,
+    what: #fff,
+    text: #000
+  )
+);

@@ -1,0 +1,22 @@
+@mixin withMode() {
+  @each $mode, $map in $modes {
+    body[mode='#{$mode}'] & {
+      $mode-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($modes, $mode), '#{$key}');
+        $mode-map: map-merge(
+          $mode-map,
+          (
+            $key: $value
+          )
+        ) !global;
+      }
+      @content;
+      $mode-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($mode-map, $key);
+}

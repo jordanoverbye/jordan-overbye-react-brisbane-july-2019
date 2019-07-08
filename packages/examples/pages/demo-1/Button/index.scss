@@ -1,0 +1,14 @@
+@import '../functions.scss';
+@import '../tokens.scss';
+
+.button {
+  appearance: none;
+  font-size: 1rem;
+  border: none;
+  padding: 0.5rem 1rem;
+
+  @include withMode() {
+    background-color: t('primary');
+    color: t('background');
+  }
+}

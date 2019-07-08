@@ -1,0 +1,254 @@
+export { default as theme } from './theme'
+import { Light } from './layout'
+import { Appear, Image } from '@mdx-deck/components'
+import { Invert } from 'mdx-deck/layouts'
+
+
+# Customising your JSX pragma for utility CSS-in-JS
+
+Jordan Overbye / @jordanoverbye
+
+---
+
+<Light>
+  <Image style={{ maxWidth: '50vw' }} src="/assets/thinkmill.jpg" />
+</Light>
+
+---
+
+# Design systems
+# Platforms & Products
+# Design & UX 
+# Training
+
+---
+
+# Node / React / GraphQL / Design
+
+----
+
+# ❤️ Open Source
+
+---
+
+# Keystone
+# React Select
+# Emotion
+
+... many more
+
+---
+
+# Over 3,000,000 monthly downloads 
+
+### IBM Watson, Atlassian, Shopify, US Gov Design System, Wix, Cisco Spark, Wordpress, and many others.
+
+---
+
+<Light>
+  <Image style={{ maxWidth: '50vw' }} src="/assets/reactconf-au.jpg" />
+</Light>
+
+---
+
+<Invert>
+
+# How does JSX work 🤔
+
+</Invert>
+
+---
+
+```
+<div className="my-class">Hello World</div>
+```
+
+&darr;
+
+```
+React.createElement(
+  "div", 
+  { className: "my-class" }, 
+  "Hello World!
+);
+```
+
+---
+
+```
+React.createElement(
+  type,
+  props,
+  children,
+);
+```
+
+---
+
+```
+import React from 'react'
+
+export default function HelloWorld() {
+  return (
+    <div className="my-class">
+      Hello World
+    </div>
+  )
+}
+```
+
+---
+```
+var React = require("react")
+
+function HelloWorld() {
+  return React.createElement("div", 
+    { className: "my-class" }, 
+    "Hello World!
+  );
+}
+```
+---
+
+```
+// import React from 'react'
+
+export default function HelloWorld() {
+  return (
+    <div className="my-class">
+      Hello World
+    </div>
+  )
+}
+```
+---
+
+```
+Uncaught ReferenceError: React is not defined
+```
+
+---
+
+# How do we customise this?
+
+---
+
+Babel
+
+```
+{
+  "plugins": [
+    ["@babel/plugin-transform-react-jsx", {
+      "pragma": "", // default is React.createElement
+      "pragmaFrag": "" // default is React.Fragment
+    }]
+  ]
+}
+```
+---
+
+Top of file
+
+```
+/** @jsx jsx **/
+import { jsx } from './custom-jsx'
+
+export default function HelloWorld() {
+  return (
+    <div className="my-class">
+      Hello World
+    </div>
+  )
+}
+```
+
+---
+
+```
+import React from 'react'
+
+export function jsx(type, props. children) {
+  return React.createElement(type, props, children)
+}
+```
+
+---
+
+```
+import React from 'react'
+
+export function jsx(type, props. children) {
+  return React.createElement('h1', 
+    { className: 'react-brisbane' }, 
+    'Hello Brisbane!'
+  )
+}
+```
+
+---
+
+```
+<div className="my-class">Hello World</div>
+```
+
+&darr;
+
+```
+React.createElement(
+  "h1", 
+  { className: "react-brisbane" }, 
+  "Hello Brisbane!
+);
+```
+
+---
+
+<Invert>
+
+# What's wrong with "traditional" CSS? 😱
+
+</Invert>
+
+---
+
+<Light>
+  <img src="/assets/css-technologies.png" />
+</Light>
+
+---
+
+# [Demo time 🐶](localhost:3000/demo-1)
+
+---
+
+<Invert>
+
+# What is Emotion 👩‍🎤
+
+</Invert>
+
+---
+
+<Light>
+  <img src="/assets/emotion-usage.png" />
+</Light>
+
+---
+
+<Invert>
+
+# Experiments 👨‍🔬
+
+</Invert>
+
+---
+
+<Invert>
+
+# Introduction to Theme UI 😍
+
+</Invert>
+
+---
+
+# Thank you 👋

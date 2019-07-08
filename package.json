@@ -1,0 +1,24 @@
+{
+  "name": "jordan-overbye-react-brisbane-july-2019",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "bolt": {
+    "workspaces": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "start:deck": "bolt w deck start",
+    "start:examples": "bolt w examples dev"
+  },
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "mdx-deck": "^2.4.0",
+    "next": "^8.1.0",
+    "next-images": "^1.1.2",
+    "node-sass": "^4.12.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}

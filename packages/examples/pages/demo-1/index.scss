@@ -1,0 +1,66 @@
+@import 'tokens.scss';
+@import 'functions.scss';
+
+// Global styles
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Base to apply theme
+
+#__next {
+  @include withMode() {
+    background: t('background');
+    color: t('text');
+  }
+}
+
+// Container
+
+.container {
+  display: grid;
+  grid-gap: 4rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  padding-bottom: 4rem;
+}
+
+// Title
+
+.title {
+  margin: 4rem 0;
+  font-size: 4rem;
+  line-height: 1;
+}
+
+// Grid
+
+.grid {
+  display: grid;
+  grid-gap: 32px;
+}
+
+@for $i from 1 through 3 {
+  .grid[col-count='#{$i}'] {
+    grid-template-columns: repeat(#{$i}, 1fr);
+  }
+}
+
+// Options
+
+.options {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 16px;
+  justify-content: start;
+  margin-bottom: 4rem;
+}
