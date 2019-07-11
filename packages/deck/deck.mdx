@@ -1,4 +1,4 @@
-export { default as theme } from './theme'
+export { themes } from './themes'
 import { Light } from './layout'
 import { Appear, Image } from '@mdx-deck/components'
 import { Invert } from 'mdx-deck/layouts'
@@ -11,7 +11,7 @@ Jordan Overbye / @jordanoverbye
 ---
 
 <Light>
-  <Image style={{ maxWidth: '50vw' }} src="/assets/thinkmill.jpg" />
+  <img style={{ maxWidth: '70vw' }} src="/assets/thinkmill.jpg" />
 </Light>
 
 ---
@@ -27,7 +27,7 @@ Jordan Overbye / @jordanoverbye
 
 ----
 
-# ❤️ Open Source
+# ❤️ Open Source ❤️ 
 
 ---
 
@@ -41,21 +41,44 @@ Jordan Overbye / @jordanoverbye
 
 # Over 3,000,000 monthly downloads 
 
-### IBM Watson, Atlassian, Shopify, US Gov Design System, Wix, Cisco Spark, Wordpress, and many others.
+### IBM Watson, Atlassian, Shopify, US Gov Design System, Wix, Cisco Spark, Wordpress, and many others
 
 ---
 
 <Light>
-  <Image style={{ maxWidth: '50vw' }} src="/assets/reactconf-au.jpg" />
+  <img style={{ maxWidth: '50vw' }} src="/assets/reactconf-au.jpg" />
 </Light>
+
+---
+
+# reactconf.com.au
 
 ---
 
 <Invert>
 
-# How does JSX work 🤔
+# What is "utility-first CSS-in-JS"?
 
 </Invert>
+
+---
+
+# CSS-in-JS syntax but with "utilities"
+
+---
+
+<ul>
+  <li>Theme-based contrains</li>
+  <Appear>
+    <li>Shorthands</li>
+    <li>Fast</li>
+    <li>Style default elements (sometimes)</li>
+  </Appear>
+</ul>
+
+---
+
+# How does JSX work 😕
 
 ---
 
@@ -85,10 +108,10 @@ React.createElement(
 
 ---
 
-```
+```jsx
 import React from 'react'
 
-export default function HelloWorld() {
+function HelloWorld() {
   return (
     <div className="my-class">
       Hello World
@@ -113,7 +136,7 @@ function HelloWorld() {
 ```
 // import React from 'react'
 
-export default function HelloWorld() {
+function HelloWorld() {
   return (
     <div className="my-class">
       Hello World
@@ -133,7 +156,7 @@ Uncaught ReferenceError: React is not defined
 
 ---
 
-Babel
+## Babel
 
 ```
 {
@@ -147,13 +170,13 @@ Babel
 ```
 ---
 
-Top of file
+## Top of file
 
 ```
 /** @jsx jsx **/
 import { jsx } from './custom-jsx'
 
-export default function HelloWorld() {
+function HelloWorld() {
   return (
     <div className="my-class">
       Hello World
@@ -178,9 +201,9 @@ export function jsx(type, props. children) {
 import React from 'react'
 
 export function jsx(type, props. children) {
-  return React.createElement('h1', 
+  return React.createElement(type, 
     { className: 'react-brisbane' }, 
-    'Hello Brisbane!'
+    children
   )
 }
 ```
@@ -188,7 +211,7 @@ export function jsx(type, props. children) {
 ---
 
 ```
-<div className="my-class">Hello World</div>
+<h1 className="my-class">Hello World</h1>
 ```
 
 &darr;
@@ -197,17 +220,17 @@ export function jsx(type, props. children) {
 React.createElement(
   "h1", 
   { className: "react-brisbane" }, 
-  "Hello Brisbane!
+  Hello World
 );
 ```
 
 ---
 
-<Invert>
+# Cool, but why?
+
+---
 
 # What's wrong with "traditional" CSS? 😱
-
-</Invert>
 
 ---
 
@@ -227,7 +250,13 @@ React.createElement(
 
 </Invert>
 
+
 ---
+
+## Performant and flexible CSS-in-JS library
+
+---
+
 
 <Light>
   <img src="/assets/emotion-usage.png" />
@@ -235,17 +264,193 @@ React.createElement(
 
 ---
 
-<Invert>
+```
+/** @jsx jsx **/
+import { jsx } from '@emotion/core'
 
-# Experiments 👨‍🔬
+function MyComponent() {
+  return (
+    <div css={{ backgroundColor: 'pink', color: 'blue' }}>
+      Hello
+    </div>
+  )
+}
+```
 
-</Invert>
+&darr;
+
+```
+<div className="css-scexrf-MyComponent>
+  Hello
+</div>
+```
+
+---
+
+# What's going on here?
+
+---
+
+<ul>
+  <li>1. Provide styles (css prop)</li>
+  <Appear>
+    <li>2. Hash the styles</li>
+    <li>3. Create CSS rule(s) using the hash as the className</li>
+    <li>4. Insert rule(s) into a stylesheet</li>
+  </Appear>
+</ul>
+
+---
+
+# `CSSStyleSheet`
+
+---
+
+```
+const styleEl = document.createElement("style");
+document.head.appendChild(styleEl);
+
+const sheet = styleEl.sheet;
+sheet.insertRule('.my-class { color: blue }', 0);
+```
+
+--- 
+
+# Why not Styled Component?
+
+---
+
+```
+import React from 'react';
+import styled from 'styled-components';
+
+const FancyComponent = styled('span')({
+  color: 'red',
+  fontWeight: 'bold',
+})
+
+function MyComponent() {
+  return (
+    <h1>
+      Hello World!
+      My name is <FancyComponent>Jordan</FancyComponent>
+    </h1>
+  )
+}
+```
+--- 
+
+```
+/** @jsx jsx **/
+import { jsx } from '@emotion/core';
+
+function MyComponent() {
+  return (
+    <h1>
+      Hello World! My name is 
+      <span css={{ color: 'red', fontWeight: 'bold' }}>
+        Jordan
+      </span>
+    </h1>
+  )
+}
+```
 
 ---
 
 <Invert>
 
-# Introduction to Theme UI 😍
+# Experiments 
+
+</Invert>
+
+---
+
+# [Using a CSS-in-JS syntax to output tailwind classes](/)
+
+---
+
+# [Theme constraints](/)
+
+---
+
+# Styled System
+
+---
+
+# Style props for rapid UI development inspired by constraint-based design system principles 
+
+---
+
+```jx
+import styled from '@emotion/styled'
+import { space, layout, typography, color } from 'styled-system'
+
+// Add styled-system functions to your component
+const Box = styled.div`
+  ${space}
+  ${layout}
+  ${typography}
+  ${color}
+`
+```
+
+---
+
+```
+<Box
+  fontSize={4}
+  fontWeight='bold'
+  p={3}
+  mb={[ 4, 5 ]}
+  color='white'
+  bg='primary'>
+  Hello
+</Box>
+```
+
+---
+
+```
+import { color, space } from 'styled-system'
+
+const theme = {
+  colors: {
+    primary: 'hotpink'
+  }
+}
+
+color({ theme, color: 'primary' })
+=> { color: 'hotpink' }
+
+space({ mt: 0, mb: 1, ml: 2, mr: 3 })
+=> { 
+    marginTop: 0, 
+    marginBottom: 4, 
+    marginLeft: 8, 
+    marginRight: 16 
+  }
+```
+
+---
+
+```
+const theme = {
+  colors: {
+    navy: '#004175'
+  }
+}
+
+console.log()
+
+// => { color: '#004175' }
+```
+
+---
+
+<Invert>
+
+# Theme UI
 
 </Invert>
 

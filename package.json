@@ -10,15 +10,22 @@
   },
   "scripts": {
     "start:deck": "bolt w deck start",
-    "start:examples": "bolt w examples dev"
+    "start:examples": "bolt w examples dev",
+    "fresh": "yarn clean && bolt",
+    "clean": "bolt ws exec -- rm -rf node_modules && rm -rf node_modules"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.14",
     "@zeit/next-sass": "^1.0.1",
+    "css-loader": "^1.0.1",
+    "emotion-theming": "^10.0.14",
+    "facepaint": "^1.2.1",
     "mdx-deck": "^2.4.0",
-    "next": "^8.1.0",
+    "next": "^9.0.0",
     "next-images": "^1.1.2",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "styled-system": "^5.0.12"
   }
 }
