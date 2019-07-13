@@ -1,17 +1,18 @@
-import image01 from './static/billy_01.jpg'
-import image02 from './static/billy_02.jpg'
-import image03 from './static/billy_03.jpg'
-import image04 from './static/billy_04.jpg'
-import image05 from './static/billy_05.jpg'
+import image01 from './static/billy_01.png'
+import image02 from './static/billy_02.png'
+import image03 from './static/billy_03.png'
+import image04 from './static/billy_04.png'
+import image05 from './static/billy_05.png'
+import image06 from './static/billy_06.png'
 
 export const data = [
   {
     id: 0,
-    title: '😴 Sleeping',
+    title: '🖥 At work',
     image: image01
   },
   {
-    id: 0,
+    id: 1,
     title: '🍔 Having lunch',
     image: image02
   },
@@ -22,19 +23,18 @@ export const data = [
   },
   {
     id: 3,
-    title: '🚶‍♂️ Enjoying a walk',
+    title: '😴 Sleeping',
     image: image04
   },
   {
     id: 4,
-    title: '💻 At work',
+    title: '🤷‍♂️ Being weird',
     image: image05
   },
   {
     id: 5,
-    title: 'At the beach',
-    location: 'Nudgee Beach',
-    image: image01
+    title: '😀 Excited',
+    image: image06
   }
 ]
 

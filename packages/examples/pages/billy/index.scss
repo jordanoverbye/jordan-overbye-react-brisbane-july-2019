@@ -50,7 +50,7 @@ body {
 }
 
 @for $i from 1 through 3 {
-  .grid[col-count='#{$i}'] {
+  .grid--#{$i} {
     grid-template-columns: repeat(#{$i}, 1fr);
   }
 }
@@ -63,4 +63,17 @@ body {
   grid-gap: 16px;
   justify-content: start;
   margin-bottom: 4rem;
+}
+
+.option-group {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  grid-gap: 1px;
+}
+
+.option-group__item {
+  &:not(.option-group__item--active) {
+    opacity: 0.4;
+  }
 }

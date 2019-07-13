@@ -1,34 +1,31 @@
-$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
-  Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$font-family: 'system-ui', sans-serif;
+$font-family-mono: 'courier-new', monospace;
 
-$primary: #00f;
-$black: #000;
-$white: #000;
+$border-radius: 4px;
 
 $modes: (
   light: (
     text: #000,
     background: #fff,
-    primary: hotpink,
-    what: #ffffff
+    highlight: hotpink,
+    card: #fff
   ),
   dark: (
-    primary: aqua,
+    text: #eee,
     background: #111,
-    what: #424242,
-    text: #eee
+    highlight: aqua,
+    card: #424242
   ),
   bright: (
-    primary: blue,
+    text: #000,
     background: yellow,
-    what: #424242,
-    text: #000
+    highlight: blue,
+    card: #fff
   ),
   dracula: (
-    primary: #44fb75,
+    text: #fff,
     background: #282a36,
-    title: #fff,
-    what: #fff,
-    text: #000
+    highlight: #44fb75,
+    card: #1c1e27
   )
 );

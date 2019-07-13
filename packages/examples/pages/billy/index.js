@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import cx from 'classnames'
 import { data, modes } from '../../data'
 import Card from './Card'
 import Button from './Button'
@@ -7,7 +8,7 @@ import './index.scss'
 const colCountOptions = [1, 2, 3]
 const initialColCount = 3
 
-const DemoSass = () => {
+export default function SassExample() {
   const [mode, setMode] = useState(modes[0])
   const [colCount, setColCount] = useState(initialColCount)
 
@@ -27,14 +28,23 @@ const DemoSass = () => {
             <Button onClick={cycleMode}>{mode}</Button>
           </div>
           <div className="option-group">
-            {colCountOptions.map(option => (
-              <Button key={option} onClick={() => setColCount(option)}>
-                {option}
-              </Button>
-            ))}
+            {colCountOptions.map(option => {
+              const isActive = option === colCount
+              return (
+                <Button
+                  key={option}
+                  className={cx('option-group__item', {
+                    'option-group__item--active': isActive
+                  })}
+                  onClick={() => setColCount(option)}
+                >
+                  {option}
+                </Button>
+              )
+            })}
           </div>
         </div>
-        <div className="grid" col-count={colCount}>
+        <div className={`grid grid--${colCount}`}>
           {data.map(item => (
             <Card {...item} key={item.id} />
           ))}
@@ -43,5 +53,3 @@ const DemoSass = () => {
     </div>
   )
 }
-
-export default DemoSass
