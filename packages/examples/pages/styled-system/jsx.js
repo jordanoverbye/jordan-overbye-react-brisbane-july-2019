@@ -1,18 +1,20 @@
 import { jsx as emotion, Global } from '@emotion/core'
 import css from '@styled-system/css'
 
-const getStyles = props => theme => {
-  if (!props.ss && !props.css) return undefined
-  const styles = css(props.ss)(theme)
-  const raw = typeof props.css === 'function' ? props.css(theme) : props.css
-  return [styles, raw]
+const getStyles = props => {
+  if (!props.css) return undefined
+  return theme => {
+    const styles = css(props.css)(theme)
+    const raw = typeof props.css === 'function' ? props.css(theme) : props.css
+    return [styles, raw]
+  }
 }
 
 const parseProps = props => {
   if (!props) return null
   const nextProps = {}
   for (let key in props) {
-    if (key === 'ss') continue
+    if (key === 'css') continue
     nextProps[key] = props[key]
   }
   nextProps.css = getStyles(props)

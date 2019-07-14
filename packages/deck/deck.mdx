@@ -35,7 +35,7 @@ Jordan Overbye / @jordanoverbye
 
 ---
 
-# 3,000,000+ monthly downloads 
+# 25,000,000+ monthly downloads 
 
 ---
 
@@ -192,12 +192,12 @@ function HelloWorld(props) {
 
 ---
 ```
-var React = require("react")
+import React from 'react'
 
 function HelloWorld(props) {
   return React.createElement("div", 
     { className: "my-class" }, 
-    "Hello World!
+    "Hello World!"
   );
 }
 ```
@@ -279,11 +279,11 @@ export function jsx(type, props, ...children) {
 // In
 <h1 className="my-class">Hello World</h1>
 
-// Out
-React.createElement("h1", 
-  { className: "react-brisbane" }, 
-  Hello World
-);
+// Transformed
+React.createElement("h1", { className: "my-class" }, "Hello World");
+
+// Returned
+React.createElement("h1", { className: "react-brisbane" }, "Hello World");
 ```
 
 ---
@@ -317,10 +317,6 @@ function WrappedComponent({ CUSTOM_TYPE, ...props }) {
     </ThemeContext.Consumer>
   )
 }
-
-
-
-
 
 ```
 
@@ -415,25 +411,6 @@ function MyComponent() {
 
 ---
 
-```jsx
-import createEmotion from 'create-emotion'
-
-export const {
-  flush,
-  hydrate,
-  cx,
-  merge,
-  getRegisteredStyles,
-  injectGlobal,
-  keyframes,
-  css,
-  sheet,
-  cache
-} = createEmotion()
-```
-
----
-
 # Why not Styled Components? 💅
 
 ---
@@ -498,7 +475,7 @@ function MyComponent() {
 
 ---
 
-# [Tailwind classes from `tw` prop](localhost:3000/tw)
+# [Tailwind classes from `tw` prop](localhost:3000/tw-prop)
 
 ---
 
@@ -507,7 +484,7 @@ function MyComponent() {
 ---
 
 ```
-<div display="flex" mt={2} p={[2, 3]} containter />
+<div display="flex" mt={2} p={[2, 3]} container />
 
 .display-flex
 .margin-top-2

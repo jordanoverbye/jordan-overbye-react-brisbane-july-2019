@@ -36,7 +36,7 @@ export default function StyledSystemJsxPropExample() {
 function InnerComponent() {
   return (
     <div
-      ss={{
+      css={{
         height: '100vh',
         width: '100vw',
         display: 'grid',
@@ -48,7 +48,7 @@ function InnerComponent() {
     >
       <div>
         <h1
-          ss={{
+          css={{
             color: 'secondary',
             fontSize: [5, 6, 7],
             mt: 0,
@@ -58,7 +58,7 @@ function InnerComponent() {
           Hello world 🌎
         </h1>
         <span
-          ss={{
+          css={{
             fontFamily: 'mono',
             fontSize: 2
           }}
