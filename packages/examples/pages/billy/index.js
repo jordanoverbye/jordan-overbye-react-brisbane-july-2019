@@ -21,20 +21,22 @@ export default function SassExample() {
 
   return (
     <div className="container">
+      <header className="header">
+        <h1 className="header__title">📷 🐶 Pics of Billy</h1>
+      </header>
       <main>
-        <h1 className="title">📷 🐶 Pics of Billy</h1>
         <div className="options">
-          <div className="option-group">
+          <div className="options__group">
             <Button onClick={cycleMode}>{mode}</Button>
           </div>
-          <div className="option-group">
+          <div className="options__group">
             {colCountOptions.map(option => {
               const isActive = option === colCount
               return (
                 <Button
                   key={option}
-                  className={cx('option-group__item', {
-                    'option-group__item--active': isActive
+                  className={cx('options__group__item', {
+                    'options__group__item--active': isActive
                   })}
                   onClick={() => setColCount(option)}
                 >

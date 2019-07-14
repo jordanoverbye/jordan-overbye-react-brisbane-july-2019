@@ -26,18 +26,15 @@ body {
 // Container
 
 .container {
-  display: grid;
-  grid-gap: 4rem;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 32px;
-  padding-bottom: 4rem;
+  padding: 4rem 3rem;
 }
 
-// Title
+// Header
 
-.title {
-  margin: 4rem 0;
+.header__title {
+  margin: 0 0 4rem 0;
   font-size: 4rem;
   line-height: 1;
 }
@@ -65,15 +62,15 @@ body {
   margin-bottom: 4rem;
 }
 
-.option-group {
+.options__group {
   display: grid;
   grid-auto-flow: column;
   justify-content: start;
   grid-gap: 1px;
 }
 
-.option-group__item {
-  &:not(.option-group__item--active) {
+.options__group__item {
+  &:not(.options__group__item--active) {
     opacity: 0.4;
   }
 }

@@ -32,8 +32,9 @@ function GlobalStyles() {
           textAlign: 'center',
           fontSize: 'calc(1rem + 1vw)'
         },
-        span: {
-          color: theme.color.tertiary
+        '#my-span': {
+          fontFamily: 'monospace',
+          color: theme.colors.tertiary
         }
       })}
     />
@@ -49,13 +50,13 @@ function InnerComponent() {
         display: 'grid',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: theme.color.secondary
+        backgroundColor: theme.colors.secondary
       })}
     >
       <div>
         <h1
           css={theme => css`
-            color: ${theme.color.primary};
+            color: ${theme.colors.primary};
             &:before,
             &:after {
               display: inline-block;
@@ -66,7 +67,7 @@ function InnerComponent() {
         >
           Hello World
         </h1>
-        <span>I'm a span that is globally styled!</span>
+        <span id="my-span">I'm a span that is globally styled!</span>
       </div>
     </div>
   )

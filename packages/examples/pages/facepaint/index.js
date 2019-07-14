@@ -24,7 +24,7 @@ export default function ResponsiveExample() {
           margin: 0
         })}
       >
-        Hello world
+        Facepaint Example
       </h1>
     </div>
   )

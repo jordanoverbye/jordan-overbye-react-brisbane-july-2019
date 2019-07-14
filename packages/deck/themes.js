@@ -1,4 +1,3 @@
-import future from '@mdx-deck/themes/future'
 import highlight from '@mdx-deck/themes/syntax-highlighter-prism'
 
 export const themes = [
@@ -14,7 +13,7 @@ export const themes = [
       fontSize: '16px',
       lineHeight: 1.4,
       textAlign: 'center',
-      padding: '0 10vw',
+      padding: '10%',
       '@media screen and (min-width:56em)': {
         fontSize: '32px'
       },
@@ -37,9 +36,8 @@ export const themes = [
       textAlign: 'center'
     },
     pre: {
-      padding: '1em',
-      backgroundColor: '#2d262d',
-      width: '80vw'
+      width: '80vw',
+      height: '80vh'
     }
   }
 ]

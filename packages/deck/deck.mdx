@@ -2,6 +2,7 @@ export { themes } from './themes'
 import { Light } from './layout'
 import { Appear, Image } from '@mdx-deck/components'
 import { Invert } from 'mdx-deck/layouts'
+import { Notes } from 'mdx-deck'
 
 
 # Customising your JSX pragma for utility CSS-in-JS
@@ -11,23 +12,18 @@ Jordan Overbye / @jordanoverbye
 ---
 
 <Light>
-  <img style={{ maxWidth: '70vw' }} src="/assets/thinkmill.jpg" />
+  <img style={{ maxWidth: '30vw' }} src="/assets/thinkmill.png" />
 </Light>
 
----
-
-# Design systems
-# Platforms & Products
-# Design & UX 
-# Training
+<Notes>
+1. Thinkmill is a consulting business focused on Design Systems, Platforms & Products, Design & UX, Training
+2. Based in Sydney
+3. Work Remote
+</Notes>
 
 ---
 
 # Node / React / GraphQL / Design
-
-----
-
-# ❤️ Open Source ❤️ 
 
 ---
 
@@ -39,9 +35,7 @@ Jordan Overbye / @jordanoverbye
 
 ---
 
-# Over 3,000,000 monthly downloads 
-
-### IBM Watson, Atlassian, Shopify, US Gov Design System, Wix, Cisco Spark, Wordpress, and many others
+# 3,000,000+ monthly downloads 
 
 ---
 
@@ -53,44 +47,120 @@ Jordan Overbye / @jordanoverbye
 
 # reactconf.com.au
 
----
+--- 
 
-<Invert>
-
-# What is "utility-first CSS-in-JS"?
-
-</Invert>
+# What is "utility CSS-in-JS"? 🤔
 
 ---
 
-# CSS-in-JS syntax but with "utilities"
+# CSS-in-JS inspired by utility CSS frameworks
+
+---
+
+<ul>
+  <li>Tailwind</li>
+  <Appear>
+    <li>Tachyons</li>
+    <li>Bass</li>
+    <li>Turret</li>
+  </Appear>
+</ul>
+
+---
+
+# What's wrong with "traditional" CSS? 😱
+
+---
+
+![](/assets/css-technologies.png)
+[Source](https://2019.stateofcss.com/technologies/#tools-scatterplot)
+
+---
+
+# [BEM / SASS Demo 🐶](localhost:3000/billy)
+
+---
+
+<ul>
+  <li>Naming things suck</li>
+  <Appear>
+    <li>Difficult to scale across projects</li>
+    <li>Performance issues</li>
+    <li>Hard to maintain</li>
+    <li>No reusability</li>
+  </Appear>
+</ul>
+
+---
+
+# A lot of these problems could be solved with utility CSS
+
+---
+
+# What are the benefits?
 
 ---
 
 <ul>
   <li>Theme-based contrains</li>
   <Appear>
+    <li>Don't need to write CSS</li>
+    <li>Design in browser</li>
     <li>Shorthands</li>
-    <li>Fast</li>
-    <li>Style default elements (sometimes)</li>
+    <li>Performant</li>
+    <li>Project agnostic</li>
   </Appear>
 </ul>
 
+--- 
+
+# Tailwind
+
+[Demo &nearr;](https://tailwindcss.com/)
+
 ---
 
-# How does JSX work 😕
+# TurretCSS
+
+[QLD Ballet &nearr;](queenslandballet.com.au/styleguide)<br />
+[La Boite &nearr;](https://laboite.com.au/styleguide)
+
+---
+
+# What are the disadvantages?
+
+---
+
+<ul>
+  <li>Handling conditional classes</li>
+  <Appear>
+    <li>Requires PurgeCSS</li>
+    <li>Custom styles</li>
+    <li>Only 1 CSS file</li>
+    <li>1 extra variant = lots of classes</li>
+  </Appear>
+</ul>
+
+--- 
+
+# [Should non-semantic classes be avoided?](https://2019.stateofcss.com/opinions/#utility-classes)
+
+---
+
+# JSX Pragmas
+
+<Appear>
+  <h2>How does JSX work?</h2>
+</Appear>
 
 ---
 
 ```
+// In
 <div className="my-class">Hello World</div>
-```
 
-&darr;
-
-```
-React.createElement(
-  "div", 
+// Out
+React.createElement("div", 
   { className: "my-class" }, 
   "Hello World!
 );
@@ -102,7 +172,7 @@ React.createElement(
 React.createElement(
   type,
   props,
-  children,
+  ...children,
 );
 ```
 
@@ -111,7 +181,7 @@ React.createElement(
 ```jsx
 import React from 'react'
 
-function HelloWorld() {
+function HelloWorld(props) {
   return (
     <div className="my-class">
       Hello World
@@ -124,7 +194,7 @@ function HelloWorld() {
 ```
 var React = require("react")
 
-function HelloWorld() {
+function HelloWorld(props) {
   return React.createElement("div", 
     { className: "my-class" }, 
     "Hello World!
@@ -136,7 +206,7 @@ function HelloWorld() {
 ```
 // import React from 'react'
 
-function HelloWorld() {
+function HelloWorld(props) {
   return (
     <div className="my-class">
       Hello World
@@ -152,11 +222,9 @@ Uncaught ReferenceError: React is not defined
 
 ---
 
-# How do we customise this?
+# Customising your pragma
 
 ---
-
-## Babel
 
 ```
 {
@@ -170,13 +238,11 @@ Uncaught ReferenceError: React is not defined
 ```
 ---
 
-## Top of file
-
 ```
 /** @jsx jsx **/
-import { jsx } from './custom-jsx'
+import { jsx } from 'custom-jsx-pragma'
 
-function HelloWorld() {
+function HelloWorld(props) {
   return (
     <div className="my-class">
       Hello World
@@ -190,9 +256,7 @@ function HelloWorld() {
 ```
 import React from 'react'
 
-export function jsx(type, props. children) {
-  return React.createElement(type, props, children)
-}
+export function jsx = React.createElement
 ```
 
 ---
@@ -200,25 +264,23 @@ export function jsx(type, props. children) {
 ```
 import React from 'react'
 
-export function jsx(type, props. children) {
-  return React.createElement(type, 
+export function jsx(type, props, ...children) {
+  return React.createElement.apply(undefined, [
+    type, 
     { className: 'react-brisbane' }, 
-    children
-  )
+    ...children
+  ])
 }
 ```
 
 ---
 
 ```
+// In
 <h1 className="my-class">Hello World</h1>
-```
 
-&darr;
-
-```
-React.createElement(
-  "h1", 
+// Out
+React.createElement("h1", 
   { className: "react-brisbane" }, 
   Hello World
 );
@@ -226,41 +288,55 @@ React.createElement(
 
 ---
 
-# Cool, but why?
+```
+import * as React from 'react'
+import { ThemeContext } from './'
+
+// Accessing context
+
+export const jsx = (type, props, ...children) => {
+  return React.createElement.apply(undefined, 
+    [
+      WrappedComponent,
+      {
+        ...props,
+        CUSTOM_TYPE: type
+      },
+      ...children
+    ]
+  )
+}
+
+function WrappedComponent({ CUSTOM_TYPE, ...props }) {
+  return (
+    <ThemeContext.Consumer>
+      {theme => {
+        // Do something cool with the context value
+        return React.createElement(CUSTOM_TYPE, parseProps(props, theme))
+      }}
+    </ThemeContext.Consumer>
+  )
+}
+
+
+
+
+
+```
 
 ---
 
-# What's wrong with "traditional" CSS? 😱
+<h1>What is Emotion 👩‍🎤</h1>
+
+<Appear>
+  <h2>A performant and flexible CSS-in-JS library</h2>
+</Appear>
 
 ---
 
-<Light>
-  <img src="/assets/css-technologies.png" />
-</Light>
+![](/assets/emotion-usage.png)
+[Source](https://2019.stateofcss.com/technologies/#tools-scatterplot)
 
----
-
-# [Demo time 🐶](localhost:3000/demo-1)
-
----
-
-<Invert>
-
-# What is Emotion 👩‍🎤
-
-</Invert>
-
-
----
-
-## Performant and flexible CSS-in-JS library
-
----
-
-
-<Light>
-  <img src="/assets/emotion-usage.png" />
-</Light>
 
 ---
 
@@ -270,18 +346,18 @@ import { jsx } from '@emotion/core'
 
 function MyComponent() {
   return (
-    <div css={{ backgroundColor: 'pink', color: 'blue' }}>
-      Hello
+    <div css={{ backgroundColor: 'hotpink' }}>
+      Hello World
     </div>
   )
 }
 ```
-
-&darr;
+---
 
 ```
+// Out
 <div className="css-scexrf-MyComponent>
-  Hello
+  Hello World
 </div>
 ```
 
@@ -292,11 +368,11 @@ function MyComponent() {
 ---
 
 <ul>
-  <li>1. Provide styles (css prop)</li>
+  <li>1. Pass the styles (css prop)</li>
   <Appear>
-    <li>2. Hash the styles</li>
-    <li>3. Create CSS rule(s) using the hash as the className</li>
-    <li>4. Insert rule(s) into a stylesheet</li>
+    <li>2. Hash the styles (className)</li>
+    <li>3. Create CSS from the styles</li>
+    <li>4. Insert CSS into a stylesheet</li>
   </Appear>
 </ul>
 
@@ -314,16 +390,55 @@ const sheet = styleEl.sheet;
 sheet.insertRule('.my-class { color: blue }', 0);
 ```
 
---- 
+---
 
-# Why not Styled Component?
+```jsx
+import styled from '@emotion/styled'
+
+const Button = styled.button`
+  background: rebeccapurple;
+  color: hotpink;
+`
+
+function MyComponent() {
+  return <Button>This my button component.</Button>
+}
+```
+
+---
+
+- [Theming](localhost:3000/theming)
+
+---
+
+- [Facepaint](localhost:3000/facepaint)
+
+---
+
+```jsx
+import createEmotion from 'create-emotion'
+
+export const {
+  flush,
+  hydrate,
+  cx,
+  merge,
+  getRegisteredStyles,
+  injectGlobal,
+  keyframes,
+  css,
+  sheet,
+  cache
+} = createEmotion()
+```
+
+---
+
+# Why not Styled Components? 💅
 
 ---
 
 ```
-import React from 'react';
-import styled from 'styled-components';
-
 const FancyComponent = styled('span')({
   color: 'red',
   fontWeight: 'bold',
@@ -332,8 +447,8 @@ const FancyComponent = styled('span')({
 function MyComponent() {
   return (
     <h1>
-      Hello World!
-      My name is <FancyComponent>Jordan</FancyComponent>
+      Hello
+      <FancyComponent>World</FancyComponent>
     </h1>
   )
 }
@@ -347,9 +462,9 @@ import { jsx } from '@emotion/core';
 function MyComponent() {
   return (
     <h1>
-      Hello World! My name is 
+      Hello
       <span css={{ color: 'red', fontWeight: 'bold' }}>
-        Jordan
+        World
       </span>
     </h1>
   )
@@ -358,42 +473,65 @@ function MyComponent() {
 
 ---
 
-<Invert>
-
-# Experiments 
-
-</Invert>
+# Experiments
 
 ---
 
-# [Using a CSS-in-JS syntax to output tailwind classes](/)
+# babel-plugin-tailwind-components
 
 ---
 
-# [Theme constraints](/)
+```
+<div css={tw`text-red hover:text-green sm:text-blue`} />
+
+{
+  color: '#e3342f',
+  ':hover': {
+    color: '#38c172'
+  },
+  '@media (min-width: 576px)': {
+    color: '#3490dc'
+  }
+}
+```
+
 
 ---
 
-# Styled System
+# [Tailwind classes from `tw` prop](localhost:3000/tw)
+
+---
+
+# What if we made our own classes?
+
+---
+
+```
+<div display="flex" mt={2} p={[2, 3]} containter />
+
+.display-flex
+.margin-top-2
+.padding-2
+.sm:padding-3
+.container
+```
+
+---
+
+# Custom styles?
+# Psuedo classes?
+
+---
+
+# [Theme constraints using context](localhost:3000/context)
+
+---
+
+# Styled system
 
 ---
 
 # Style props for rapid UI development inspired by constraint-based design system principles 
-
----
-
-```jx
-import styled from '@emotion/styled'
-import { space, layout, typography, color } from 'styled-system'
-
-// Add styled-system functions to your component
-const Box = styled.div`
-  ${space}
-  ${layout}
-  ${typography}
-  ${color}
-`
-```
 
 ---
 
@@ -412,7 +550,7 @@ const Box = styled.div`
 ---
 
 ```
-import { color, space } from 'styled-system'
+import { color } from 'styled-system'
 
 const theme = {
   colors: {
@@ -421,39 +559,53 @@ const theme = {
 }
 
 color({ theme, color: 'primary' })
-=> { color: 'hotpink' }
+
+// Out
+{ color: 'hotpink' }
+
+```
+
+---
+```
+import { space } from 'styled-system'
 
 space({ mt: 0, mb: 1, ml: 2, mr: 3 })
-=> { 
-    marginTop: 0, 
-    marginBottom: 4, 
-    marginLeft: 8, 
-    marginRight: 16 
-  }
-```
 
----
-
-```
-const theme = {
-  colors: {
-    navy: '#004175'
-  }
+// Out
+{ 
+  marginTop: 0, 
+  marginBottom: 4, 
+  marginLeft: 8, 
+  marginRight: 16 
 }
 
-console.log()
-
-// => { color: '#004175' }
 ```
 
 ---
 
-<Invert>
+# [Styled system prop](localhost:3000/styled-system)
+
+---
 
 # Theme UI
 
-</Invert>
+---
+
+- Emotion
+- Styled System
+- MDX
+- Typography.js
 
 ---
 
-# Thank you 👋
+# [Theme UI demo](https://theme-ui.com/)
+
+---
+
+### "Instead of assuming that people are dumb, ignorant, and making mistakes, assume they are smart, doing their best, and that you lack context."
+
+@slicknet
+
+---
+
+# Thank you 👋 🐶 🎉

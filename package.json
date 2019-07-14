@@ -22,6 +22,7 @@
     "css-loader": "^1.0.1",
     "emotion-theming": "^10.0.14",
     "facepaint": "^1.2.1",
+    "lodash.get": "^4.4.2",
     "mdx-deck": "^2.4.0",
     "next": "^9.0.0",
     "next-images": "^1.1.2",

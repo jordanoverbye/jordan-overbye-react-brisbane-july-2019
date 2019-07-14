@@ -1,25 +1,15 @@
-export default props => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '100vw',
-      height: '100vh'
-    }}
-    {...props}
-  />
-)
-
 export const Light = props => (
   <div
-    style={{
+    css={{
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       width: '100vw',
       height: '100vh',
-      backgroundColor: 'white'
+      padding: '10%',
+      backgroundColor: 'white',
+      overflow: 'hidden'
     }}
     {...props}
   />
