@@ -4,7 +4,6 @@ import { Appear, Image } from '@mdx-deck/components'
 import { Invert } from 'mdx-deck/layouts'
 import { Notes } from 'mdx-deck'
 
-
 # Customising your JSX pragma for utility CSS-in-JS
 
 Jordan Overbye / @jordanoverbye
@@ -16,9 +15,8 @@ Jordan Overbye / @jordanoverbye
 </Light>
 
 <Notes>
-1. Thinkmill is a consulting business focused on Design Systems, Platforms & Products, Design & UX, Training
-2. Based in Sydney
-3. Work Remote
+  1. Thinkmill is a consulting business focused on Design Systems, Platforms &amp;
+  Products, Design &amp; UX, Training 2. Based in Sydney 3. Work Remote
 </Notes>
 
 ---
@@ -28,14 +26,16 @@ Jordan Overbye / @jordanoverbye
 ---
 
 # Keystone
+
 # React Select
+
 # Emotion
 
 ... many more
 
 ---
 
-# 25,000,000+ monthly downloads 
+# 25,000,000+ monthly downloads
 
 ---
 
@@ -47,7 +47,13 @@ Jordan Overbye / @jordanoverbye
 
 # reactconf.com.au
 
---- 
+---
+
+### "Instead of assuming that people are dumb, ignorant, and making mistakes, assume they are smart, doing their best, and that you lack context."
+
+@slicknet
+
+---
 
 # What is "utility CSS-in-JS"? 🤔
 
@@ -72,6 +78,7 @@ Jordan Overbye / @jordanoverbye
 
 ---
 
+
 ![](/assets/css-technologies.png)
 [Source](https://2019.stateofcss.com/technologies/#tools-scatterplot)
 
@@ -82,11 +89,11 @@ Jordan Overbye / @jordanoverbye
 ---
 
 <ul>
-  <li>Naming things suck</li>
+  <li>naming__things--is-annoying</li>
   <Appear>
+    <li>Hard to maintain</li>
     <li>Difficult to scale across projects</li>
     <li>Performance issues</li>
-    <li>Hard to maintain</li>
     <li>No reusability</li>
   </Appear>
 </ul>
@@ -112,7 +119,7 @@ Jordan Overbye / @jordanoverbye
   </Appear>
 </ul>
 
---- 
+---
 
 # Tailwind
 
@@ -122,7 +129,7 @@ Jordan Overbye / @jordanoverbye
 
 # TurretCSS
 
-[QLD Ballet &nearr;](queenslandballet.com.au/styleguide)<br />
+[QLD Ballet &nearr;](https://queenslandballet.com.au/styleguide)<br />
 [La Boite &nearr;](https://laboite.com.au/styleguide)
 
 ---
@@ -134,14 +141,14 @@ Jordan Overbye / @jordanoverbye
 <ul>
   <li>Handling conditional classes</li>
   <Appear>
-    <li>Requires PurgeCSS</li>
+    <li>May require PurgeCSS</li>
     <li>Custom styles</li>
     <li>Only 1 CSS file</li>
     <li>1 extra variant = lots of classes</li>
   </Appear>
 </ul>
 
---- 
+---
 
 # [Should non-semantic classes be avoided?](https://2019.stateofcss.com/opinions/#utility-classes)
 
@@ -155,25 +162,18 @@ Jordan Overbye / @jordanoverbye
 
 ---
 
-```
+```jsx
 // In
 <div className="my-class">Hello World</div>
 
 // Out
-React.createElement("div", 
-  { className: "my-class" }, 
-  "Hello World!
-);
+React.createElement('div', { className: 'my-class' }, 'Hello World')
 ```
 
 ---
 
-```
-React.createElement(
-  type,
-  props,
-  ...children,
-);
+```jsx
+React.createElement(type, props, ...children)
 ```
 
 ---
@@ -182,41 +182,33 @@ React.createElement(
 import React from 'react'
 
 function HelloWorld(props) {
-  return (
-    <div className="my-class">
-      Hello World
-    </div>
-  )
+  return <div className="my-class">Hello World</div>
 }
 ```
 
 ---
-```
+
+```jsx
 import React from 'react'
 
 function HelloWorld(props) {
-  return React.createElement("div", 
-    { className: "my-class" }, 
-    "Hello World!"
-  );
+  return React.createElement('div', { className: 'my-class' }, 'Hello World')
 }
 ```
+
 ---
 
-```
+```js
 // import React from 'react'
 
 function HelloWorld(props) {
-  return (
-    <div className="my-class">
-      Hello World
-    </div>
-  )
+  return <div className="my-class">Hello World</div>
 }
 ```
+
 ---
 
-```
+```js
 Uncaught ReferenceError: React is not defined
 ```
 
@@ -226,7 +218,7 @@ Uncaught ReferenceError: React is not defined
 
 ---
 
-```
+```js
 {
   "plugins": [
     ["@babel/plugin-transform-react-jsx", {
@@ -236,24 +228,21 @@ Uncaught ReferenceError: React is not defined
   ]
 }
 ```
+
 ---
 
-```
+```jsx
 /** @jsx jsx **/
-import { jsx } from 'custom-jsx-pragma'
+import { jsx } from './custom-jsx-pragma'
 
 function HelloWorld(props) {
-  return (
-    <div className="my-class">
-      Hello World
-    </div>
-  )
+  return <div className="my-class">Hello World</div>
 }
 ```
 
 ---
 
-```
+```jsx
 import React from 'react'
 
 export function jsx = React.createElement
@@ -261,13 +250,13 @@ export function jsx = React.createElement
 
 ---
 
-```
+```jsx
 import React from 'react'
 
 export function jsx(type, props, ...children) {
   return React.createElement.apply(undefined, [
-    type, 
-    { className: 'react-brisbane' }, 
+    type,
+    { className: 'react-brisbane' },
     ...children
   ])
 }
@@ -275,36 +264,34 @@ export function jsx(type, props, ...children) {
 
 ---
 
-```
+```jsx
 // In
 <h1 className="my-class">Hello World</h1>
 
 // Transformed
-React.createElement("h1", { className: "my-class" }, "Hello World");
+jsx('h1', { className: 'my-class' }, 'Hello World')
 
 // Returned
-React.createElement("h1", { className: "react-brisbane" }, "Hello World");
+React.createElement('h1', { className: 'react-brisbane' }, 'Hello World')
 ```
 
 ---
 
-```
-import * as React from 'react'
+```jsx
+import React from 'react'
 import { ThemeContext } from './'
 
 // Accessing context
 
 export const jsx = (type, props, ...children) => {
-  return React.createElement.apply(undefined, 
-    [
-      WrappedComponent,
-      {
-        ...props,
-        CUSTOM_TYPE: type
-      },
-      ...children
-    ]
-  )
+  return React.createElement.apply(undefined, [
+    WrappedComponent,
+    {
+      ...props,
+      CUSTOM_TYPE: type
+    },
+    ...children
+  ])
 }
 
 function WrappedComponent({ CUSTOM_TYPE, ...props }) {
@@ -317,7 +304,6 @@ function WrappedComponent({ CUSTOM_TYPE, ...props }) {
     </ThemeContext.Consumer>
   )
 }
-
 ```
 
 ---
@@ -333,25 +319,20 @@ function WrappedComponent({ CUSTOM_TYPE, ...props }) {
 ![](/assets/emotion-usage.png)
 [Source](https://2019.stateofcss.com/technologies/#tools-scatterplot)
 
-
 ---
 
-```
+```jsx
 /** @jsx jsx **/
 import { jsx } from '@emotion/core'
 
 function MyComponent() {
-  return (
-    <div css={{ backgroundColor: 'hotpink' }}>
-      Hello World
-    </div>
-  )
+  return <div css={{ backgroundColor: 'hotpink' }}>Hello World</div>
 }
 ```
+
 ---
 
-```
-// Out
+```jsx
 <div className="css-scexrf-MyComponent>
   Hello World
 </div>
@@ -378,12 +359,12 @@ function MyComponent() {
 
 ---
 
-```
-const styleEl = document.createElement("style");
-document.head.appendChild(styleEl);
+```jsx
+const styleEl = document.createElement('style')
+document.head.appendChild(styleEl)
 
-const sheet = styleEl.sheet;
-sheet.insertRule('.my-class { color: blue }', 0);
+const sheet = styleEl.sheet
+sheet.insertRule('.my-class { color: blue }', 0)
 ```
 
 ---
@@ -415,10 +396,10 @@ function MyComponent() {
 
 ---
 
-```
+```jsx
 const FancyComponent = styled('span')({
   color: 'red',
-  fontWeight: 'bold',
+  fontWeight: 'bold'
 })
 
 function MyComponent() {
@@ -430,19 +411,18 @@ function MyComponent() {
   )
 }
 ```
---- 
 
-```
+---
+
+```jsx
 /** @jsx jsx **/
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/core'
 
 function MyComponent() {
   return (
     <h1>
       Hello
-      <span css={{ color: 'red', fontWeight: 'bold' }}>
-        World
-      </span>
+      <span css={{ color: 'red', fontWeight: 'bold' }}>World</span>
     </h1>
   )
 }
@@ -458,7 +438,7 @@ function MyComponent() {
 
 ---
 
-```
+```jsx
 <div css={tw`text-red hover:text-green sm:text-blue`} />
 
 {
@@ -472,7 +452,6 @@ function MyComponent() {
 }
 ```
 
-
 ---
 
 # [Tailwind classes from `tw` prop](localhost:3000/tw-prop)
@@ -483,7 +462,7 @@ function MyComponent() {
 
 ---
 
-```
+```jsx
 <div display="flex" mt={2} p={[2, 3]} container />
 
 .display-flex
@@ -496,6 +475,7 @@ function MyComponent() {
 ---
 
 # Custom styles?
+
 # Psuedo classes?
 
 ---
@@ -508,25 +488,26 @@ function MyComponent() {
 
 ---
 
-# Style props for rapid UI development inspired by constraint-based design system principles 
+# Style props for rapid UI development inspired by constraint-based design system principles
 
 ---
 
-```
+```jsx
 <Box
   fontSize={4}
-  fontWeight='bold'
+  fontWeight="bold"
   p={3}
-  mb={[ 4, 5 ]}
-  color='white'
-  bg='primary'>
+  mb={[4, 5]}
+  color="white"
+  bg="primary"
+>
   Hello
 </Box>
 ```
 
 ---
 
-```
+```jsx
 import { color } from 'styled-system'
 
 const theme = {
@@ -538,22 +519,24 @@ const theme = {
 color({ theme, color: 'primary' })
 
 // Out
-{ color: 'hotpink' }
-
+{
+  color: 'hotpink'
+}
 ```
 
 ---
-```
+
+```jsx
 import { space } from 'styled-system'
 
 space({ mt: 0, mb: 1, ml: 2, mr: 3 })
 
 // Out
-{ 
-  marginTop: 0, 
-  marginBottom: 4, 
-  marginLeft: 8, 
-  marginRight: 16 
+{
+  marginTop: 0,
+  marginBottom: 4,
+  marginLeft: 8,
+  marginRight: 16
 }
 
 ```
@@ -576,12 +559,6 @@ space({ mt: 0, mb: 1, ml: 2, mr: 3 })
 ---
 
 # [Theme UI demo](https://theme-ui.com/)
-
----
-
-### "Instead of assuming that people are dumb, ignorant, and making mistakes, assume they are smart, doing their best, and that you lack context."
-
-@slicknet
 
 ---
 

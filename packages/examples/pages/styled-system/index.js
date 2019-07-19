@@ -60,7 +60,7 @@ function InnerComponent() {
         <span
           css={{
             fontFamily: 'mono',
-            fontSize: 2
+            fontSize: [2, 3],
           }}
         >
           This is awesome

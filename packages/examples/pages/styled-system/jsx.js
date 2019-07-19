@@ -5,8 +5,7 @@ const getStyles = props => {
   if (!props.css) return undefined
   return theme => {
     const styles = css(props.css)(theme)
-    const raw = typeof props.css === 'function' ? props.css(theme) : props.css
-    return [styles, raw]
+    return styles
   }
 }
 

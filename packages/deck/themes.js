@@ -5,7 +5,7 @@ export const themes = [
   {
     font: 'system-ui, sans-serif',
     colors: {
-      text: '#f0f',
+      text: '#fff',
       background: '#000',
       link: '#0ff'
     },
